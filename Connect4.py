@@ -1,5 +1,5 @@
 # Kienen Wayrynen
-# Assignment #9 and #10 - Connect 4
+# Connect 4
 # November 18, 2014
 
 from random import *
@@ -14,7 +14,6 @@ class Board:
     """ a datatype representing a C4 board
         with an arbitrary number of rows and cols
     """
-    
     def __init__(self,width,height,window):
         
         #THIS WILL BE THE BOARD
@@ -61,12 +60,9 @@ class Board:
             for col in range( self.width ): # 7
                 boardRow += [' ']   # add a space to this row
             self.data += [boardRow]        
-        
-        
-        
+
         #LINES
-        
-        
+	
         """self.line1 = self.draw.create_line(110,0,110,480,fill="black",width=3)
         self.line2 = self.draw.create_line(220,0,220,480,fill="black",width=3)
         self.line3 = self.draw.create_line(330,0,330,480,fill="black",width=3)
@@ -78,10 +74,8 @@ class Board:
         self.line9 = self.draw.create_line(767,18,767,480,fill="black",width=3)
         self.line10 = self.draw.create_line(19,18,19,480,fill="black",width=3)"""        
         
-        
         #CIRCLES
-        
-        
+
         initialColor = "white"
         y = 15
         self.circles = []
@@ -144,9 +138,7 @@ class Board:
             else:
                 self.draw.itemconfig(self.message,text = "Unallowed Move")
                 self.window.update()    
-    
-    
-    
+
     def __repr__(self):
         #print out rows & cols
         s = ''   # the string to return
@@ -191,19 +183,18 @@ class Board:
     def allowsMove(self,col):
         col=int(col)
         if 0 <= col < self.width:
-            return self.data[0][col]==' '
-       
+            return self.data[0][col]=='   
     
     def scoresFor ( self , b , ox , ply ):
         score = []
         for col in range (s.width):
             if b.allowsMove(col):
-                b.addMove (col,ox)                # make move
+                b.addMove (col,ox)    # make move
                 if b.winsFor(ox):     # check did I win
                     score += [100]
-                elif ply == 1 :                     # if ply = 1
+                elif ply == 1 :       # if ply = 1
                     score += [50]
-                else:                               # op = opposite player
+                else:                 # op = opposite player
                     if ox =="X":
                         op = "O"
                     else:
@@ -215,8 +206,6 @@ class Board:
             else:
                 score += [-1]
         return score    
-    
-    
     
     def winsFor(self, ox):
     # check for horizontal wins
@@ -255,15 +244,12 @@ class Board:
                 self.data[row+3][col+3] == ox:
                     return True  
         return False
-    
-    
+
     def isFull(self):
         for col in range(0, self.width):
             if self.allowsMove(col):
                     return False
         return True   
-    
-    
 
 class Player:
     
@@ -274,7 +260,7 @@ class Player:
         #self.tbt = tbt
         self.ox = ox
     
-    def oppCh(self,ox):                    # opposing checker
+    def oppCh(self,ox): # opposing checker
         if ox == "x":
             next = "o"
         else:
@@ -285,12 +271,12 @@ class Player:
         score = []
         for col in range (s.width):
             if s.allowsMove(col):
-                s.addMove (col,ox)                # make move
+                s.addMove (col,ox)    # make move
                 if s.winsFor(ox):     # check did I win
                     score += [100]
-                elif ply == 1 :                     # if ply = 1
+                elif ply == 1 :       # if ply = 1
                     score += [50]
-                else:                               # op = opposite player
+                else:                 # op = opposite player
                     if ox =="X":
                         op = "O"
                     else:
@@ -322,7 +308,8 @@ class Player:
         print(L)
         print(highScore)
         return choice(columnList)
-        
+       
+	# to play the game with your self uncomment this code
     """def hostGame(self):
         while True:    
             print(self)
@@ -349,9 +336,8 @@ class Player:
                 print (self)   
                 print ("Tie")
                 break"""    
-    
-    
-    """def playGameWith(self,aiPlayer):
+
+    def playGameWith(self,aiPlayer):
         while True:    
             print(self)
             print ('Player X choose a column')
@@ -378,9 +364,8 @@ class Player:
                 print(self)
                 print ("Tie")
                 break
-            oMove = aiPlayer.nextMove(self)"""        
-
-    
+            oMove = aiPlayer.nextMove(self)        
+	
 def runMyScreen():
     root = Tk()
     root.title("Connect 4")
